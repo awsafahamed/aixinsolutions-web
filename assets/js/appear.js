@@ -1,6 +1,6 @@
 /*
  * jQuery.appear
- * https://github.com/bas2k/jquery.appear/
+ * https://gaixin solutions.com/bas2k/jquery.appear/
  * http://code.google.com/p/jquery-appear/
  * http://bas2k.ru/
  *

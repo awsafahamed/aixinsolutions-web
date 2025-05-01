@@ -33,45 +33,6 @@
 	headerStyle();
 	
 	
-	//Submenu Dropdown Toggle
-	if($('.main-header li').length){
-		$('.main-header li.dropdown').append('<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>');
-		
-		//Dropdown Button
-		$('.main-header li.dropdown .dropdown-btn').on('click', function() {
-			$(this).prev('ul').slideToggle(500);
-		});
-		
-		//Disable dropdown parent link
-		$('.navigation li.dropdown > a').on('click', function(e) {
-			e.preventDefault();
-		});
-		
-		//Disable dropdown parent link
-		$('.main-header .navigation li.dropdown > a,.hidden-bar .side-menu li.dropdown > a').on('click', function(e) {
-			e.preventDefault();
-		});
-
-		$('.main-menu .navigation > li .mega-menu-bar > .column > ul').addClass('first-ul');
-		$('.main-header .main-menu .navigation > li > ul').addClass('last-ul');
-
-		$('.xs-sidebar-group .close-button').on('click', function(e) {
-			$('.xs-sidebar-group.info-group').removeClass('isActive');
-		});
-
-		$('.about-widget').on('click', function(e) {
-			$('.about-sidebar').addClass('active');
-		});
-
-		$('.about-sidebar .close-button').on('click', function(e) {
-			$('.about-sidebar').removeClass('active');
-		});
-		
-		$('.about-sidebar .gradient-layer').on('click', function(e) {
-			$('.about-sidebar').removeClass('active');
-		});
-		
-	}
 	
 	
 	//Mobile Nav Hide Show

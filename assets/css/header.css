@@ -787,7 +787,7 @@
 	padding-right: 17px !important;
 } 
 
-.main-header .main-menu .navigation > li.dropdown > a:after{
+/*.main-header .main-menu .navigation > li.dropdown > a:after{
     position: absolute;
     content: "\f107";
     right: 0px;
@@ -813,7 +813,7 @@
 	-webkit-transition:all 500ms ease;
 	-ms-transition:all 500ms ease;
 	-o-transition:all 500ms ease;
-}
+}*/
 
 .main-header .main-menu .navigation > li > a .menu-text{
     display: -webkit-box;

@@ -95,7 +95,7 @@
 .footer-social_box a:hover{
 	color: var(--white-color);
 	background-color: rgba(0, 13, 255, 1);
-    background-image: linear-gradient(180deg, rgba(0, 13, 255, 1) 0%, rgba(193, 21, 236, 1) 100%);
+    background-image: linear-gradient(180deg, rgb(0, 128, 255) 0%, rgb(7, 7, 81) 100%);
 }
 
 .footer-contact_list{

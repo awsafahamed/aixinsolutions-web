@@ -1676,6 +1676,7 @@
 	line-height:44px;
 	cursor:pointer;
 	z-index:5;
+	display: none;
 }
 
 .main-header .mobile-menu .navigation li.dropdown .dropdown-btn:after{

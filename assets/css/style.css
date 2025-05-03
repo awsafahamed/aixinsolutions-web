@@ -961,7 +961,7 @@
 
 .process-one{
 	position:relative;
-	padding:200px 0px 120px;
+	padding:150px 0px 120px;
 }
 
 .process-one.style-two{
@@ -1894,7 +1894,7 @@
 
 .incredible-one{
 	position:relative;
-	padding:140px 0px 140px;
+	padding:170px 0px 140px;
 }
 
 .incredible-one .sec-title{
@@ -2611,13 +2611,13 @@
 
 .about-two_title span{
 	position:relative;
-	color:var(--color-two);
+	color:#0069fd;
 }
 
 .about-two_title strong{
 	position:relative;
 	font-weight:700;
-	color:var(--main-color);
+	color:#0069fd;
 }
 
 .about-two_image-outer{

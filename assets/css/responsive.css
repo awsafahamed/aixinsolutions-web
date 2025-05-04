@@ -443,7 +443,16 @@
 		width:33%;
 		display:inline-block;
 	}
+	.offer-one{
+		padding: 100px 0px 220px !important;
+	}
+	.marketing-one {
+		padding: 0px 0px 0px !important;
+	}
 	
+	.marketing-one h1{
+		font-size: 100px !important;
+	}
 }
 	
 @media only screen and (max-width: 1032px){

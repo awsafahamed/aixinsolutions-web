@@ -240,7 +240,7 @@
 				
 				<!-- Contact Form -->
 				<div class="contact-form">
-					<form method="post" action="https://formspree.io/f/manooeny">
+					<form  id="contactForm"  action="https://formspree.io/f/manooeny" method="post">
 
 						<div class="row clearfix">
 						
@@ -566,7 +566,7 @@
 	</svg>
 </div>
 <script>
-	document.querySelector('form').addEventListener('submit', async (e) => {
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   
   const form = e.target;
@@ -578,38 +578,36 @@
     submitBtn.disabled = true;
     submitBtn.innerHTML = 'Sending...';
     
-    const formData = {
-      username: form.username.value,
-      lastname: form.lastname.value,
-      email: form.email.value,
-      services: form.services.value,
-      message: form.message.value
-    };
-
-    const response = await fetch('/api/send_email.js', {
+    // Use Formspree's native fetch handling
+    const response = await fetch(form.action, {
       method: 'POST',
+      body: new FormData(form),
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
+        'Accept': 'application/json'
+      }
     });
-
-    const result = await response.json();
     
+    // Check if response is OK
     if (response.ok) {
       alertify.success('Message sent successfully!');
       form.reset();
     } else {
-      alertify.error(result.error || 'Failed to send message');
+      const errorData = await response.json();
+      if (errorData.errors) {
+        alertify.error(errorData.errors.map(error => error.message).join(', '));
+      } else {
+        alertify.error('Failed to send message. Please try again.');
+      }
     }
   } catch (error) {
-    alertify.error('Network error. Please try again.');
     console.error('Submission error:', error);
+    alertify.error('Network error. Please try again.');
   } finally {
     submitBtn.disabled = false;
     submitBtn.innerHTML = originalBtnText;
   }
 });
+
 	</script>
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/popper.min.js"></script>

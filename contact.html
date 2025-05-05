@@ -14,7 +14,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 <!-- Color Switcher Mockup -->
 <link href="assets/css/color-switcher-design.css" rel="stylesheet">
 
@@ -239,7 +240,7 @@
 				
 				<!-- Contact Form -->
 				<div class="contact-form">
-					<form method="post" action="send-email.php">
+					<form method="post" action="send-email.php" id="contactForm">
 
 						<div class="row clearfix">
 						
@@ -564,7 +565,19 @@
 		<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
 	</svg>
 </div>
-
+<script>
+	$(document).ready(function() {
+		// Check if there's a success or error message in the URL
+		const urlParams = new URLSearchParams(window.location.search);
+		const status = urlParams.get('status');
+		
+		if (status === 'success') {
+			alertify.success('Your message has been sent successfully!');
+		} else if (status === 'error') {
+			alertify.error('Failed to send message. Please try again later.');
+		}
+	});
+</script>
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
@@ -595,7 +608,7 @@
 <script src="assets/js/color-settings.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script src="assets/js/script.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 </body>
 
 <!-- Mirrored from expert-themes.com/html/aixin solutions/aixin solutions/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 01 May 2025 05:01:56 GMT -->

@@ -566,36 +566,48 @@
 	</svg>
 </div>
 <script>
-	document.querySelector('form').addEventListener('submit', async function(e) {
+	document.querySelector('form').addEventListener('submit', async (e) => {
   e.preventDefault();
   
-  const formData = {
-    username: this.username.value,
-    lastname: this.lastname.value,
-    email: this.email.value,
-    services: this.services.value,
-    message: this.message.value
-  };
-
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.innerHTML;
+  
   try {
-    const response = await fetch('/api/send-email', {
+    // Show loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Sending...';
+    
+    const formData = {
+      username: form.username.value,
+      lastname: form.lastname.value,
+      email: form.email.value,
+      services: form.services.value,
+      message: form.message.value
+    };
+
+    const response = await fetch('/api/send_email.js', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData)
     });
-    
+
     const result = await response.json();
     
-    if (result.success) {
-      alertify.success(result.message);
-      this.reset();
+    if (response.ok) {
+      alertify.success('Message sent successfully!');
+      form.reset();
     } else {
-      alertify.error(result.message);
+      alertify.error(result.error || 'Failed to send message');
     }
   } catch (error) {
-    alertify.error('Failed to send message. Please try again later.');
+    alertify.error('Network error. Please try again.');
+    console.error('Submission error:', error);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnText;
   }
 });
 	</script>

@@ -565,7 +565,32 @@
 		<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
 	</svg>
 </div>
-
+<script>
+	document.querySelector('form').addEventListener('submit', function(e) {
+		e.preventDefault();
+		
+		const form = e.target;
+		const formData = new FormData(form);
+		
+		fetch(form.action, {
+			method: 'POST',
+			body: formData
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success) {
+				alertify.success(data.message);
+				form.reset();
+			} else {
+				alertify.error(data.message);
+			}
+		})
+		.catch(error => {
+			alertify.error('An error occurred. Please try again later.');
+			console.error('Error:', error);
+		});
+	});
+	</script>
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>

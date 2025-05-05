@@ -566,17 +566,62 @@
 	</svg>
 </div>
 <script>
+
 	$(document).ready(function() {
-		// Check if there's a success or error message in the URL
-		const urlParams = new URLSearchParams(window.location.search);
-		const status = urlParams.get('status');
-		
-		if (status === 'success') {
-			alertify.success('Your message has been sent successfully!');
-		} else if (status === 'error') {
-			alertify.error('Failed to send message. Please try again later.');
-		}
-	});
+    $('#contactForm').submit(function(e) {
+        e.preventDefault();
+        
+        var form = $(this);
+        var formData = form.serialize();
+        
+        $.ajax({
+            type: 'POST',
+            url: 'send-email.php',
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    alertify.success(response.message);
+                    form[0].reset();
+                } else {
+                    alertify.error(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                alertify.error('An error occurred. Please try again later.');
+                console.error(error);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $('#contactForm').submit(function(e) {
+        e.preventDefault();
+        
+        var form = $(this);
+        var formData = form.serialize();
+        
+        $.ajax({
+            type: 'POST',
+            url: 'send-email.php',
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    alertify.success(response.message);
+                    form[0].reset();
+                } else {
+                    alertify.error(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                alertify.error('An error occurred. Please try again later.');
+                console.error(error);
+            }
+        });
+    });
+});
 </script>
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/popper.min.js"></script>

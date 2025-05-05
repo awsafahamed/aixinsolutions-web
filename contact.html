@@ -240,7 +240,7 @@
 				
 				<!-- Contact Form -->
 				<div class="contact-form">
-					<form method="post" action="send_email.php">
+					<form method="post" action="https://formspree.io/f/manooeny">
 
 						<div class="row clearfix">
 						
@@ -566,44 +566,38 @@
 	</svg>
 </div>
 <script>
-	document.querySelector('form').addEventListener('submit', function(e) {
-		e.preventDefault();
-		
-		const form = e.target;
-		const formData = new FormData(form);
-		
-		fetch(form.action, {
-			method: 'POST',
-			body: formData
-		})
-		.then(response => {
-			// First check if the response is OK (status 200-299)
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			
-			// Try to parse as JSON, but fall back to text if it fails
-			return response.text().then(text => {
-				try {
-					return JSON.parse(text);
-				} catch {
-					throw new Error(text || 'Unknown error occurred');
-				}
-			});
-		})
-		.then(data => {
-			if (data && data.success) {
-				alertify.success(data.message);
-				form.reset();
-			} else {
-				alertify.error(data?.message || 'Form submission failed');
-			}
-		})
-		.catch(error => {
-			console.error('Error:', error);
-			alertify.error(error.message || 'An error occurred. Please try again later.');
-		});
-	});
+	document.querySelector('form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const formData = {
+    username: this.username.value,
+    lastname: this.lastname.value,
+    email: this.email.value,
+    services: this.services.value,
+    message: this.message.value
+  };
+
+  try {
+    const response = await fetch('/api/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      alertify.success(result.message);
+      this.reset();
+    } else {
+      alertify.error(result.message);
+    }
+  } catch (error) {
+    alertify.error('Failed to send message. Please try again later.');
+  }
+});
 	</script>
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/popper.min.js"></script>

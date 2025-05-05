@@ -576,18 +576,32 @@
 			method: 'POST',
 			body: formData
 		})
-		.then(response => response.json())
+		.then(response => {
+			// First check if the response is OK (status 200-299)
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			
+			// Try to parse as JSON, but fall back to text if it fails
+			return response.text().then(text => {
+				try {
+					return JSON.parse(text);
+				} catch {
+					throw new Error(text || 'Unknown error occurred');
+				}
+			});
+		})
 		.then(data => {
-			if (data.success) {
+			if (data && data.success) {
 				alertify.success(data.message);
 				form.reset();
 			} else {
-				alertify.error(data.message);
+				alertify.error(data?.message || 'Form submission failed');
 			}
 		})
 		.catch(error => {
-			alertify.error('An error occurred. Please try again later.');
 			console.error('Error:', error);
+			alertify.error(error.message || 'An error occurred. Please try again later.');
 		});
 	});
 	</script>

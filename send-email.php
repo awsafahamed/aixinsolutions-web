@@ -1,4 +1,7 @@
 <?php
+// Always set JSON content type header first
+header('Content-Type: application/json');
+
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -6,11 +9,16 @@ ini_set('display_errors', 1);
 // Check if the request is POST
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     http_response_code(405);
-    header('Content-Type: application/json');
     echo json_encode(['success' => false, 'message' => 'Method not allowed']);
     exit;
 }
 
+// Check if the script is being accessed directly
+if (basename(__FILE__) == basename($_SERVER['SCRIPT_FILENAME'])) {
+    http_response_code(403);
+    echo json_encode(['success' => false, 'message' => 'Direct access forbidden']);
+    exit;
+}
 // Include PHPMailer
 require 'vendor/autoload.php';
 

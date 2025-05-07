@@ -20,7 +20,32 @@
     {
       "source": "/contact",
       "destination": "/contact.html"
-    }
+    },
+    {
+        "source": "/faq's",
+        "destination": "/faq.html"
+      },
+    
+      {
+        "source": "/privacy",
+        "destination": "/privacy.html"
+      },
+      {
+        "source": "/terms",
+        "destination": "/terms.html"
+      },
+      {
+        "source": "/blog",
+        "destination": "/blog.html"
+      },
+      {
+        "source": "/Projects/Thingz.lk:slug*",
+        "destination": "thing-lk.html"
+      },
+      {
+        "source": "/:path*",
+        "destination": "/404.html"
+      }
     ]
   }
   

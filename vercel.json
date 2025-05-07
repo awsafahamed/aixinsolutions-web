@@ -19,7 +19,7 @@
     },
     {
       "source": "/contact",
-      "destination": "/contact.html"
+      "destination": "/contact"
     },
     {
         "source": "/faq's",
@@ -35,11 +35,12 @@
         "destination": "/terms.html"
       },
       {
-        "source": "/blog",
-        "destination": "/blog.html"
+        "source": "/contact",
+        "destination": "/contact.html"
       },
+     
       {
-        "source": "/Projects/Thingz.lk:slug*",
+        "source": "/Projects/Thingz.lk*",
         "destination": "thing-lk.html"
       },
       {
